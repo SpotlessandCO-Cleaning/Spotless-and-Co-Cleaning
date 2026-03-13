@@ -1,0 +1,917 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spotless & Co Cleaning</title>
+
+  <style>
+    :root{
+      --rose:#a55353;
+      --rose-dark:#8f3f3f;
+      --cream:#f5f1ef;
+      --cream-card:#f7f4f2;
+      --text:#333333;
+      --muted:#555555;
+      --white:#ffffff;
+      --shadow:0 12px 28px rgba(0,0,0,.07);
+      --radius:24px;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      background-color:var(--cream);
+      background-image:url("background.png");
+      background-repeat:repeat-y;
+      background-size:100% auto;
+      background-position:top center;
+      color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+
+    img{
+      max-width:100%;
+      display:block;
+    }
+
+    a{
+      color:inherit;
+    }
+
+    .container{
+      width:min(1200px, calc(100% - 48px));
+      margin:0 auto;
+    }
+
+    /* HEADER */
+
+    header{
+      background:#F0EBEC;
+      box-shadow:0 4px 18px rgba(0,0,0,.06);
+      position:sticky;
+      top:0;
+      z-index:1000;
+      backdrop-filter:blur(6px);
+    }
+
+    .header-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      min-height:92px;
+      gap:24px;
+    }
+
+    .logo img{
+      height:68px;
+      width:auto;
+    }
+
+    nav{
+      display:flex;
+      align-items:center;
+      gap:34px;
+    }
+
+    nav a{
+      text-decoration:none;
+      color:#3f3f3f;
+      font-size:15px;
+      font-weight:500;
+      letter-spacing:.02em;
+    }
+
+    nav a:hover{
+      color:var(--rose);
+    }
+
+    .cta{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:220px;
+      padding:14px 24px;
+      border-radius:999px;
+      background:var(--rose);
+      color:var(--white);
+      font-weight:700;
+      text-decoration:none;
+      box-shadow:0 10px 20px rgba(165,83,83,.18);
+      transition:transform .2s ease, opacity .2s ease;
+    }
+
+    .cta:hover{
+      transform:translateY(-1px);
+      opacity:.95;
+    }
+
+    /* HERO */
+
+    .hero-wrap{
+      padding:26px 0 14px;
+    }
+
+    .hero-card{
+      display:grid;
+      grid-template-columns:44% 56%;
+      background:var(--cream-card);
+      border-radius:30px;
+      overflow:hidden;
+      min-height:520px;
+      box-shadow:0 16px 40px rgba(0,0,0,.06);
+    }
+
+    .hero-text{
+      padding:68px 54px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      position:relative;
+      background:
+        url("background.png") left bottom / 170px auto no-repeat;
+    }
+
+    .hero-text h1{
+      margin:0;
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:70px;
+      line-height:.95;
+      font-weight:500;
+      color:#2f2a2a;
+      letter-spacing:.01em;
+    }
+
+    .hero-text h1 span{
+      color:#9b4b4b;
+      font-weight:700;
+    }
+
+    .sub{
+      margin:28px 0 18px;
+      font-size:18px;
+      letter-spacing:4px;
+      color:#444;
+    }
+
+    .promo{
+      display:inline-block;
+      width:fit-content;
+      background:#efe5e1;
+      color:#9b4b4b;
+      padding:13px 24px;
+      border-radius:999px;
+      font-size:17px;
+      font-weight:700;
+      margin-bottom:20px;
+    }
+
+    .hero-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:fit-content;
+      min-width:260px;
+      padding:18px 30px;
+      border-radius:999px;
+      background:var(--rose);
+      color:var(--white);
+      text-decoration:none;
+      font-weight:700;
+      font-size:16px;
+      box-shadow:0 10px 20px rgba(165,83,83,.24);
+      transition:transform .2s ease, box-shadow .2s ease;
+    }
+
+    .hero-btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 16px 28px rgba(165,83,83,.24);
+    }
+
+    .hero-image{
+      position:relative;
+      background:
+        url("background.png") right top / 150px auto no-repeat;
+    }
+
+    .hero-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .hero-image::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:0;
+      width:140px;
+      height:100%;
+      background:linear-gradient(to right, var(--cream-card) 0%, rgba(247,244,242,0) 100%);
+      pointer-events:none;
+    }
+
+    /* GENERAL SECTION TITLES */
+
+    .section-title{
+      margin:0 0 26px;
+      text-align:center;
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:42px;
+      color:#9b4b4b;
+      font-weight:500;
+      letter-spacing:.03em;
+    }
+
+    .section-divider{
+      text-align:center;
+      color:#9b4b4b;
+      font-size:24px;
+      margin:-10px 0 26px;
+      opacity:.85;
+    }
+
+    /* SERVICES */
+
+    .services{
+      padding:20px 0 26px;
+    }
+
+    .service-grid{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:22px;
+    }
+
+    .service-card{
+      background:rgba(255,255,255,.9);
+      border-radius:20px;
+      padding:34px 24px 28px;
+      text-align:center;
+      box-shadow:0 10px 26px rgba(0,0,0,.07);
+    }
+
+    .service-card .icon{
+      font-size:54px;
+      line-height:1;
+      margin-bottom:18px;
+      color:#8f4848;
+    }
+
+    .service-card h3{
+      margin:0 0 8px;
+      color:#8f4848;
+      font-size:19px;
+      letter-spacing:.06em;
+      font-weight:700;
+    }
+
+    .service-card p{
+      margin:0;
+      color:#444;
+      font-size:17px;
+      line-height:1.35;
+    }
+
+    /* ABOUT */
+
+    .about{
+      padding:26px 0 24px;
+    }
+
+    .about-grid{
+      display:grid;
+      grid-template-columns:320px 1fr;
+      gap:30px;
+      align-items:center;
+      position:relative;
+    }
+
+    .about-grid::after{
+      content:"";
+      position:absolute;
+      right:0;
+      top:50%;
+      transform:translateY(-50%);
+      width:180px;
+      height:360px;
+      background:url("images/about-flower-right.png") right center / contain no-repeat;
+      pointer-events:none;
+      opacity:.95;
+    }
+
+    .about-image img{
+      width:100%;
+      border-radius:18px;
+      box-shadow:var(--shadow);
+    }
+
+    .about-copy{
+      padding-right:190px;
+    }
+
+    .about-copy h2{
+      margin:0 0 12px;
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:56px;
+      color:#9b4b4b;
+      font-weight:500;
+    }
+
+    .about-copy p{
+      margin:0 0 24px;
+      max-width:620px;
+      font-size:20px;
+      line-height:1.6;
+      color:#444;
+    }
+
+    .about-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:190px;
+      padding:14px 24px;
+      border-radius:999px;
+      background:var(--rose);
+      color:var(--white);
+      text-decoration:none;
+      font-weight:700;
+      box-shadow:0 10px 20px rgba(165,83,83,.18);
+    }
+
+    /* TESTIMONIALS */
+
+    .testimonials{
+      padding:20px 0 44px;
+    }
+
+    .testimonial-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:18px;
+    }
+
+    .testimonial{
+      background:rgba(255,255,255,.92);
+      border-radius:18px;
+      padding:28px 24px;
+      text-align:center;
+      box-shadow:0 10px 24px rgba(0,0,0,.06);
+    }
+
+    .stars{
+      color:#e0a33a;
+      font-size:28px;
+      letter-spacing:2px;
+      margin-bottom:12px;
+    }
+
+    .testimonial p{
+      margin:0;
+      font-size:17px;
+      line-height:1.5;
+      color:#444;
+      font-style:italic;
+    }
+
+    /* QUOTE FORM */
+
+    .quote-form{
+      padding:18px 0 50px;
+    }
+
+    .quote-card{
+      background:rgba(255,255,255,.88);
+      border-radius:26px;
+      padding:34px;
+      box-shadow:var(--shadow);
+    }
+
+    .quote-card p{
+      text-align:center;
+      max-width:760px;
+      margin:0 auto 24px;
+      color:#555;
+      line-height:1.6;
+    }
+
+    .quote-form form{
+      max-width:980px;
+      margin:0 auto;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:repeat(2, 1fr);
+      gap:18px;
+      margin-bottom:18px;
+    }
+
+    .quote-form input,
+    .quote-form select,
+    .quote-form textarea{
+      width:100%;
+      border:1px solid #e2d6d2;
+      border-radius:14px;
+      padding:16px 18px;
+      font:inherit;
+      color:var(--text);
+      background:#fff;
+      outline:none;
+    }
+
+    .quote-form textarea{
+      resize:vertical;
+      min-height:150px;
+      margin-bottom:18px;
+    }
+
+    .quote-form input:focus,
+    .quote-form select:focus,
+    .quote-form textarea:focus{
+      border-color:#c88e8e;
+      box-shadow:0 0 0 3px rgba(165,83,83,.12);
+    }
+
+    .quote-submit{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:240px;
+      padding:16px 26px;
+      border:0;
+      border-radius:999px;
+      background:var(--rose);
+      color:#fff;
+      font:inherit;
+      font-weight:700;
+      cursor:pointer;
+      box-shadow:0 10px 20px rgba(165,83,83,.18);
+    }
+
+    /* FOOTER */
+
+    footer{
+      margin-top:10px;
+      background:linear-gradient(135deg, var(--rose-dark), var(--rose));
+      color:#fff;
+      padding:42px 0;
+    }
+
+    .footer-inner{
+      display:grid;
+      grid-template-columns:1.2fr .9fr;
+      gap:30px;
+      align-items:center;
+    }
+
+    .footer-left h3{
+      margin:0 0 12px;
+      font-size:26px;
+      letter-spacing:.06em;
+    }
+
+    .footer-left p{
+      margin:8px 0;
+      font-size:18px;
+      line-height:1.5;
+    }
+
+    .footer-right{
+      text-align:right;
+    }
+
+    .footer-right h3{
+      margin:0 0 14px;
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:42px;
+      font-weight:500;
+    }
+
+    .footer-cta{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      background:#fff;
+      color:var(--rose-dark);
+      text-decoration:none;
+      min-width:290px;
+      padding:18px 28px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:18px;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 1100px){
+      .hero-text h1{
+        font-size:58px;
+      }
+
+      .about-copy{
+        padding-right:140px;
+      }
+
+      .about-grid::after{
+        width:130px;
+      }
+    }
+
+    @media (max-width: 980px){
+      .header-inner{
+        flex-direction:column;
+        justify-content:center;
+        gap:18px;
+        padding:18px 0;
+      }
+
+      nav{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:18px;
+      }
+
+      .hero-card{
+        grid-template-columns:1fr;
+        min-height:auto;
+      }
+
+      .hero-text{
+        padding:42px 28px 30px;
+      }
+
+      .hero-text h1{
+        font-size:48px;
+      }
+
+      .sub{
+        font-size:15px;
+        letter-spacing:3px;
+      }
+
+      .hero-image{
+        min-height:300px;
+      }
+
+      .hero-image::before{
+        display:none;
+      }
+
+      .service-grid,
+      .testimonial-grid,
+      .form-grid,
+      .footer-inner{
+        grid-template-columns:1fr;
+      }
+
+      .about-grid{
+        grid-template-columns:1fr;
+      }
+
+      .about-grid::after{
+        display:none;
+      }
+
+      .about-copy{
+        padding-right:0;
+      }
+
+      .footer-right{
+        text-align:center;
+      }
+    }
+
+    @media (max-width: 640px){
+      .container{
+        width:min(100% - 24px, 1200px);
+      }
+
+      .logo img{
+        height:56px;
+      }
+
+      .cta{
+        min-width:auto;
+        width:100%;
+      }
+
+      nav{
+        width:100%;
+      }
+
+      nav a{
+        font-size:14px;
+      }
+
+      .hero-text h1{
+        font-size:40px;
+      }
+
+      .section-title{
+        font-size:34px;
+      }
+
+      .about-copy h2{
+        font-size:42px;
+      }
+
+      .about-copy p{
+        font-size:18px;
+      }
+
+      .quote-card{
+        padding:24px 18px;
+      }
+
+      .quote-submit,
+      .footer-cta{
+        width:100%;
+      }
+
+      .footer-right h3{
+        font-size:34px;
+      }
+    }
+	.icon img{
+  width:70px;
+  height:70px;
+  display:block;
+  margin:0 auto 10px;
+}
+.copyright{
+  font-size:14px;
+  opacity:.85;
+}
+.footer-logo{
+  display:block;
+  margin:0 auto 15px auto;
+  max-width:400px;
+}
+.contact{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:6px 0;
+}
+
+.iconn{
+  width:18px;
+  height:18px;
+  stroke:#000;
+  stroke-width:1.8;
+  fill:none;
+}
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container header-inner">
+      <div class="logo">
+        <a href="index.html">
+          <img src="logo.png" alt="Spotless & Co Cleaning">
+        </a>
+      </div>
+
+      <nav>
+        <a href="#services">SERVICES</a>
+        <a href="#about">ABOUT US</a>
+        <a href="#testimonials">TESTIMONIALS</a>
+        <a class="cta" href="#quote">REQUEST A QUOTE →</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero-wrap">
+      <div class="container">
+        <section class="hero-card">
+          <div class="hero-text">
+            <h1>
+              BOOK YOUR<br>
+              <span>FREE QUOTE</span><br>
+              TODAY
+            </h1>
+
+            <p class="sub">ACCEPTING NEW CLIENTS</p>
+
+            <div class="promo">10% OFF YOUR FIRST CLEAN</div>
+
+            <a class="hero-btn" href="#quote">REQUEST A QUOTE →</a>
+          </div>
+
+          <div class="hero-image">
+            <img src="living.jpg" alt="Clean kitchen interior">
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <div class="container">
+        <h2 class="section-title">OUR CLEANING SERVICES</h2>
+        <div class="section-divider">⌁</div>
+
+        <div class="service-grid">
+
+  <div class="service-card">
+    <div class="icon">
+      <img src="residential.png" alt="Residential Cleaning">
+    </div>
+    <h3>RESIDENTIAL</h3>
+    <p>Cleaning</p>
+  </div>
+
+  <div class="service-card">
+    <div class="icon">
+      <img src="commercial.png" alt="Commercial Cleaning">
+    </div>
+    <h3>COMMERCIAL</h3>
+    <p>Cleaning</p>
+  </div>
+
+  <div class="service-card">
+    <div class="icon">
+      <img src="newbuild.png" alt="New Builds">
+    </div>
+    <h3>NEW BUILDS</h3>
+    <p>&amp; Construction</p>
+  </div>
+
+  <div class="service-card">
+    <div class="icon">
+      <img src="airbnb.png" alt="Airbnb Turnovers">
+    </div>
+    <h3>AIRBNB</h3>
+    <p>Turnovers</p>
+  </div>
+
+</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-image">
+            <img src="bathroom.jpg" alt="Cleaning service in action">
+          </div>
+
+          <div class="about-copy">
+            <h2>ABOUT US</h2>
+            <p>
+              Spotless &amp; Co. provides professional, reliable cleaning services
+              throughout the Niagara Region. We take pride in delivering spotless
+              results every time.
+            </p>
+            <a class="about-btn" href="#quote">LEARN MORE</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+      <div class="container">
+        <h2 class="section-title">WHAT OUR CLIENTS SAY</h2>
+
+        <div class="testimonial-grid">
+          <div class="testimonial">
+            <div class="stars">★★★★★</div>
+            <p>“My house has never looked better!-Carry T.”</p>
+          </div>
+
+          <div class="testimonial">
+            <div class="stars">★★★★★</div>
+            <p>“Reliable and professional. Highly recommend! Steve H.”</p>
+          </div>
+
+          <div class="testimonial">
+            <div class="stars">★★★★★</div>
+            <p>“Perfect for Airbnb turnovers!-LK Properties”</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote-form" id="quote">
+      <div class="container">
+        <div class="quote-card">
+          <h2 class="section-title">REQUEST A QUOTE</h2>
+          <p>
+            Tell us a little about your property and the type of cleaning you need.
+            We’ll get back to you with a custom quote.
+          </p>
+
+          <form action="https://formspree.io/f/xpqyrolw" method="post">
+            <div class="form-grid">
+              <input type="text" name="name" placeholder="Your Name" required>
+              <input type="email" name="email" placeholder="Your Email" required>
+              <input type="tel" name="phone" placeholder="Phone Number">
+              <select name="service" required>
+                <option value="">Select a Service</option>
+                <option>Residential Cleaning</option>
+                <option>Commercial Cleaning</option>
+                <option>New Build Cleaning</option>
+                <option>Airbnb Turnovers</option>
+              </select>
+              <input type="text" name="location" placeholder="City / Area">
+              <input type="text" name="frequency" placeholder="One-time, weekly, bi-weekly...">
+			  <select name="Preferred Time of Clean" required>
+				<option value="">Select a Time</option>
+				<option>Mornings</option>
+				<option>Afternoons</option>
+				<option>Evenings</option>
+				<option>Weekends</opton>
+			</select>
+			 <select name="How did you hear about us?" required>
+				<option value="">How did you hear about us?</option>
+				<option>Referral</option>
+				<option>Facebook</option>
+				<option>Instagram</option>
+				<option>Business Card</opton>
+			</select>
+            </div>
+
+            <textarea name="message" placeholder="Help us understand your space:
+Let us know the size of your property and list the rooms or areas you'd like cleaned (bedrooms, bathrooms, kitchens, offices, common areas, etc.). This helps us provide a more accurate quote." required></textarea>
+
+            <button class="quote-submit" type="submit">SEND QUOTE REQUEST</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-left">
+
+  <h3>SERVING THE NIAGARA REGION</h3>
+
+  <p>Residential • Commercial • New Builds • Airbnb</p>
+
+  <p class="contact">
+    
+    <!-- Email Icon -->
+    <svg class="iconn" viewBox="0 0 24 24">
+      <path d="M3 6h18v12H3z"/>
+      <path d="M3 6l9 7 9-7"/>
+    </svg>
+
+    spotlessandcocleaning@gmail.com
+  </p>
+
+  <p class="contact">
+
+    <!-- Instagram Icon -->
+    <svg class="iconn" viewBox="0 0 24 24">
+      <rect x="3" y="3" width="18" height="18" rx="5"/>
+      <circle cx="12" cy="12" r="4"/>
+      <circle cx="17" cy="7" r="1.5"/>
+    </svg>
+
+    spotlessandcocleaning
+  </p>
+
+</div>
+	   
+	  <div class="footer-right">
+	  <img src="spotless_black_line.png" class="footer-logo">
+
+  <p>2026 Spotless & Co. All Rights Reserved.</p>
+
+
+	  </div>
+
+      
+      </div>
+    </div>
+  </footer>
+
+</body>
+<script>
+document.addEventListener("mousemove", function(e){
+
+  const header = document.getElementById("siteHeader");
+
+  if(e.clientY < 80){
+    header.classList.add("show");
+  } else {
+    header.classList.remove("show");
+  }
+
+});
+</script>
+</html>
